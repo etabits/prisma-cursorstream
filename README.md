@@ -43,19 +43,22 @@ for await (const post of stream) {
 
 ## Advanced API
 
-The following options provide additional controls over the streaming process.
+The following options (passed as a second argument) provide additional controls over the streaming process.
 
-- **Batch size**: The `take` property of the findMany arg is repurposed to specify how many rows are fetched each batch. Defaults to `100`
-- **Pre-fill size**: Since the streaming happens asynchronously, it may be useful to fetch more rows well before current batch is completely consumed. Use the `skip` property of the findMany arg which is repurposed to specify the internal `highWaterMark` of the `Readable` stream. Defaults to double the batch size (usually `200`).
+- **Batch size**: `batchSize` specifies how many rows are fetched each batch. Defaults to `100`
+- **Pre-fill size**: Since the streaming happens asynchronously, it may be useful to fetch more rows well before current batch is completely consumed. `prefill` specifies the internal `highWaterMark` of the `Readable` stream. Defaults to double the batch size (usually `200`).
 - **Batch transformation**: Sometimes you may need to pre-process the resulting rows in batches before they are consumed. This is where the `batchTransformer` comes in. If provided, it receives an array of the last fetched batch of rows, can operate on them asynchronously, and then return an array of transformed rows to be consumed instead. Types are properly handled.
 
 ```js
 const stream = db.post.cursorStream(
   {
-    take: 42, // batches of 42 posts at a time
-    skip: 69, // prefetch up to 69 posts
+    where: {
+      published: true,
+    },
   },
   {
+    batchSize: 42, // batches of 42 posts at a time
+    prefill: 69, // prefetch up to 69+ posts
     async batchTransformer(posts) {
       const translations = await translate(posts.map((p) => p.title));
       return posts.map((p, i) => ({

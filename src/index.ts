@@ -16,7 +16,9 @@ export default Prisma.defineExtension(
           >(
             this: T,
             findManyArgs: A,
-            { batchTransformer } = {} as {
+            { batchSize, prefill, batchTransformer } = {} as {
+              batchSize?: number;
+              prefill?: number;
               batchTransformer?: C;
             }
           ): Iterable<
@@ -28,8 +30,8 @@ export default Prisma.defineExtension(
           > {
             const context = Prisma.getExtensionContext(this);
 
-            const take = findManyArgs.take || 100;
-            const highWaterMark = findManyArgs.skip || take * 2;
+            const take = batchSize || 100;
+            const highWaterMark = prefill || take * 2;
             const cursorField =
               Object.keys(findManyArgs.cursor || {})[0] || "id";
 
