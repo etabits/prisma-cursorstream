@@ -23,6 +23,21 @@ import cursorStream from "prisma-cursorstream";
 const db = new PrismaClient().$extends(cursorStream);
 ```
 
+<details>
+<summary>Using CommonJS `require`?</summary>
+
+### CommonJS `require`
+
+```js
+const cursorStream = require("prisma-cursorstream").default;
+
+const db = new PrismaClient().$extends(cursorStream);
+```
+
+Refer to [#1](https://github.com/etabits/prisma-cursorstream/issues/1).
+
+</details>
+
 ## Usage
 
 ```js
