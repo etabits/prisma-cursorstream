@@ -10,7 +10,7 @@ export default Prisma.defineExtension(
         $allModels: {
           cursorStream<
             T,
-            A extends Prisma.Args<T, "findMany">,
+            A extends Prisma.Args<T, "findMany"> | undefined,
             R extends Prisma.Result<T, A, "findMany">[number],
             C extends ((dataset: R[]) => Promise<unknown[]>) | undefined
           >(
@@ -28,6 +28,7 @@ export default Prisma.defineExtension(
                 : R
               : R
           > {
+            findManyArgs = findManyArgs ?? {};
             const context = Prisma.getExtensionContext(this);
 
             const take = batchSize || 100;
