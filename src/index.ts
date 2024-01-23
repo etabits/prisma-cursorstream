@@ -28,7 +28,7 @@ export default Prisma.defineExtension(
                 : R
               : R
           > {
-            findManyArgs = findManyArgs ?? {};
+            findManyArgs = findManyArgs ?? ({} as A);
             const context = Prisma.getExtensionContext(this);
 
             const take = batchSize || 100;
