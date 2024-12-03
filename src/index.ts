@@ -50,11 +50,7 @@ export default Prisma.defineExtension(
                     ...findManyArgs,
                     take,
                     skip: cursorValue ? 1 : 0,
-                    cursor: cursorValue
-                      ? {
-                          [cursorField]: cursorValue,
-                        }
-                      : undefined,
+                    ...(cursorValue ? { cursor: { [cursorField]: cursorValue } } : {}),
                   });
                   const transformedResults = batchTransformer
                     ? await batchTransformer(results)
