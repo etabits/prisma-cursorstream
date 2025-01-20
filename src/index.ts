@@ -21,7 +21,7 @@ export default Prisma.defineExtension(
               prefill?: number;
               batchTransformer?: C;
             }
-          ): Iterable<
+          ): AsyncIterable<
             C extends Function
               ? Awaited<ReturnType<C>>[number] extends object
                 ? Awaited<ReturnType<C>>[number]
