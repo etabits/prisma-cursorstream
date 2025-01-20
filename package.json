@@ -1,6 +1,6 @@
 {
   "name": "prisma-cursorstream",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Prisma Stream Client Extension (Cursor-based Implementation)",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -8,7 +8,12 @@
   "scripts": {
     "prepublishOnly": "tsc"
   },
-  "keywords": ["prisma-extension", "prisma-client", "prisma", "streams"],
+  "keywords": [
+    "prisma-extension",
+    "prisma-client",
+    "prisma",
+    "streams"
+  ],
   "author": "Hasan Arous <hasan.arous@gmail.com> (https://www.aularon.com/)",
   "license": "MIT",
   "devDependencies": {
