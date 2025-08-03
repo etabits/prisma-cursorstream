@@ -16,10 +16,11 @@ export default Prisma.defineExtension(
           >(
             this: T,
             findManyArgs: A,
-            { batchSize, prefill, batchTransformer } = {} as {
+            { batchSize, prefill, batchTransformer, cursor } = {} as {
               batchSize?: number;
               prefill?: number;
               batchTransformer?: C;
+              cursor?: Extract<keyof R, string> | undefined;
             }
           ): AsyncIterable<
             C extends Function
@@ -33,7 +34,7 @@ export default Prisma.defineExtension(
 
             const take = batchSize || 100;
             const highWaterMark = prefill || take * 2;
-            const cursorField =
+            const cursorField = cursor ||
               Object.keys(findManyArgs.cursor || {})[0] || "id";
 
             if (findManyArgs.select && !findManyArgs.select[cursorField]) {
