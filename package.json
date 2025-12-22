@@ -1,6 +1,6 @@
 {
   "name": "prisma-cursorstream",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Prisma Stream Client Extension (Cursor-based Implementation)",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -22,6 +22,6 @@
     "typescript": "^5.1.6"
   },
   "peerDependencies": {
-    "@prisma/client": ">= 5.1.1 < 7"
+    "@prisma/client": ">= 5.1.1 < 8"
   }
 }
